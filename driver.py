@@ -46,22 +46,22 @@ class TestDriver():
         logout.click()
         
 
-    def create_room(self):
+    def create_room(self, topic, name, description):
 
         self.driver.get(self.home_url + "create-room/") 
 
         # Fill in the form fields
         topic_input = self.driver.find_element(By.NAME, "topic")
         topic_input.clear()  
-        topic_input.send_keys("Selenium Topi")
+        topic_input.send_keys(topic)
 
         name_input = self.driver.find_element(By.NAME, "name")
         name_input.clear()
-        name_input.send_keys("Selenium Name")
+        name_input.send_keys(name)
 
         description_input = self.driver.find_element(By.NAME, "description")
         description_input.clear()
-        description_input.send_keys("Selenium made this")
+        description_input.send_keys(description)
 
         # Submit the form
         submit_button = self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']")

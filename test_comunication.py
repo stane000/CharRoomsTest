@@ -36,12 +36,28 @@ def test_send_meessge():
     assert "Hey from stane00" in messages_after[0].text, f"Hey from stane00 expected to be last message, actual: {messages_after[1].text}"
 
 
+@pytest.mark.room
+@pytest.mark.parametrize("count", [1, 2, 3, 4, 5])
+def test_create_room(count):
 
+    driver = TestDriver()
+    if not driver.is_user_logged():
+        driver.login("stankovicigor199737@gmail.com", "E11zje9de")
+
+    assert driver.is_user_logged(), "User is not logged"
+    
+    rooms_before = driver.get_number_of_roooms_on_page()
+
+    driver.create_room("New Topic", "Room by selenium", "Ovu sobu je kreirao test")
+
+    rooms_after = driver.get_number_of_roooms_on_page()
+
+    assert rooms_after == rooms_before + 1, f"Wrong number of rooms, expected {rooms_before + 1}, actual {rooms_after}"
 
 
 
 
 if __name__ == "__main__":
-    pytest.main(["-v", "-s", os.path.abspath(__file__)])
+    pytest.main(["-v", "-s","-m room", os.path.abspath(__file__)])
 
 
