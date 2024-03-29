@@ -13,6 +13,9 @@ class TestDriver():
         self.driver = webdriver.Chrome()
         self.home_url = "https://stane000.pythonanywhere.com/"
 
+    
+    def quit(self):
+        self.driver.quit()
 
     def login(self, username, password):
 
@@ -73,6 +76,13 @@ class TestDriver():
 
         # Locate specific elements by class name
         return len(self.driver.find_elements(By.CLASS_NAME, "roomListRoom"))
+    
+    def get_all_roooms(self):
+
+        self.driver.get(self.home_url)  
+
+        # Locate specific elements by class name
+        return self.driver.find_elements(By.CLASS_NAME, "roomListRoom")
 
     def send_message(self, room_id, room_meesage="hey"):
 
